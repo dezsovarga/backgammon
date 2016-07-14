@@ -4,9 +4,9 @@ import {reduxForm} from 'redux-form';
 
 class SignUpForm extends React.Component {
     render () {
-        const {fields: {firstName, lastName, email}, onRegisterSubmit} = this.props;
+        const {fields: {firstName, lastName, email}, handleSubmit} = this.props;
         return (
-            <form onSubmit={onRegisterSubmit}>
+            <form onSubmit={handleSubmit(this.props.onRegisterSubmit)}>
                 <div>
                     <label>First Name</label>
                     <input type="text" placeholder="First Name" {...firstName}/>
@@ -29,13 +29,14 @@ SignUpForm.propTypes = {
     fields: PropTypes.object.isRequired,
     // It will run validation, both sync and async, and, if the form is valid,
     // it will call this.props.onRegisterSubmit function
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    onRegisterSubmit: PropTypes.func.isRequired
     // Whether or not your form is currently submitting.
     // This prop will only work if you have passed an onSubmit function
     // that returns a promise. It will be true until the promise is resolved or rejected.
 };
 
 export default reduxForm({ // <----- THIS IS THE IMPORTANT PART!
-    form: 'SignUp',                           // a unique name for this form
+    form: 'SignUpForm',                           // a unique name for this form
     fields: ['firstName', 'lastName', 'email'] // all the fields in your form
 })(SignUpForm);
