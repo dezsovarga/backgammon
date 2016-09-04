@@ -9,13 +9,14 @@
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch"
   },
-  "author": "Cory House",
-  "license": "MIT",
+  "author": "Varga Dezso",
+  "license": "djyooo",
   "dependencies": {
     "babel-polyfill": "6.8.0",
     "bootstrap": "3.3.6",
     "jquery": "2.2.3",
     "react": "15.0.2",
+    "react-bootstrap": "^0.30.1",
     "react-dom": "15.0.2",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",

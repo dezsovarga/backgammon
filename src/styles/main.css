@@ -1,0 +1,4 @@
+@import "./styles.css";
+@import "./logo-panel.css";
+@import './generics/generic-entry.scss';
+@import './variables/variables-entry.scss';
