@@ -20,9 +20,19 @@ const validate = values => {
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
         errors.email = 'Invalid email address'
     }
+    if (!values.password) {
+        errors.password = 'Required';
+    } else{
+        if (values.password.length <6){
+            errors.password = "Must be longer than 6 characters"
+        }
+    }
+    if (values.password !== values.confirmPassword) {
+        errors.confirmPassword = "Passwords do not match";
+    }
 
     return errors
-}
+};
 class SignUpForm extends React.Component {
 
     render () {
@@ -55,45 +65,38 @@ class SignUpForm extends React.Component {
                 <div className="form-group">
                     <label className="control-label col-xs-3">Email</label>
                     <div className="col-xs-9">
-                        <input type="email"
-                               className="form-control"
-                               id="inputEmail"
-                               placeholder="Email"
-                               {...email}
+                        <ValidationField
+                            type="text"
+                            placeholder="Email"
+                            fieldType="input"
+                            {...email}
                         />
                     </div>
                 </div>
                 <div className="form-group">
                     <label className="control-label col-xs-3">Password</label>
                     <div className="col-xs-9">
-                        <input type="password"
-                               className="form-control"
-                               id="inputPassword"
-                               placeholder="Password"
-                               {...password}
+                        <ValidationField
+                            type="password"
+                            placeholder="Password"
+                            fieldType="input"
+                            {...password}
                         />
                     </div>
                 </div>
                 <div className="form-group">
                     <label className="control-label col-xs-3">Confirm Password</label>
                     <div className="col-xs-9">
-                        <input type="password"
-                               className="form-control"
-                               id="inputConfirmPassword"
-                               placeholder="Confirm Password"
-                               {...confirmPassword}
+                        <ValidationField
+                            type="password"
+                            placeholder="Confirm Password"
+                            fieldType="input"
+                            {...confirmPassword}
                         />
                     </div>
                 </div>
                 <div className="form-group">
-                    <div className="col-xs-offset-2 col-xs-10">
-                        <div className="checkbox">
-                            <label><input type="checkbox"/> Remember me</label>
-                        </div>
-                    </div>
-                </div>
-                <div className="form-group">
-                    <div className="col-xs-offset-2 col-xs-10">
+                    <div className="col-xs-offset-5 col-xs-7">
                         <button type="submit" className="btn btn-primary">Register</button>
                     </div>
                 </div>
@@ -104,6 +107,7 @@ class SignUpForm extends React.Component {
             <div className="logo-panel-wrapper">
                 <Panel header="Sign up" className="logo-panel">
                     {content}
+                    {this.props.signUpData}
                 </Panel>
             </div>
         );
@@ -123,6 +127,6 @@ SignUpForm.propTypes = {
 
 export default reduxForm({ // <----- THIS IS THE IMPORTANT PART!
     form: 'SignUpForm',                           // a unique name for this form
-    fields: ['firstName', 'lastName', 'email', 'password', 'conformPassword'], // all the fields in your form
+    fields: ['firstName', 'lastName', 'email', 'password', 'confirmPassword'], // all the fields in your form
     validate
 })(SignUpForm);
