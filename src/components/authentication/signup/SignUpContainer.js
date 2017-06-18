@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import SignUpForm from './SignUpForm';
 import * as actions from './actions';
 
-
 // @connect(mapStateToProps, mapDispatchToProps)
 
- class SignUpContainer extends React.Component {
+class SignUpContainer extends React.Component {
 
     onRegisterSubmit(registrationData) {
-        this.props.dispatch(
-            actions.registerAccount(registrationData)
+        const { dispatch } = this.props;
+        return dispatch(
+            actions.signUp(registrationData)
         );
     }
 
@@ -18,7 +18,6 @@ import * as actions from './actions';
         return (
             <SignUpForm
                 onRegisterSubmit={this.onRegisterSubmit.bind(this)}
-                signUpData = {this.props.signUp.inProgress}
             />
         );
     }
@@ -27,11 +26,15 @@ import * as actions from './actions';
 SignUpContainer.propTypes = {
     dispatch: PropTypes.func.isRequired
 };
+
 function mapStateToProps(state) {
     return {
         signUp: state.register
     };
 }
 
+function mapDispatchToProps(dispatch) {
+    return { dispatch };
+}
 
-export default connect(mapStateToProps) (SignUpContainer);
+export default connect(mapStateToProps, mapDispatchToProps) (SignUpContainer);

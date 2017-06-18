@@ -1,19 +1,45 @@
-import { SIGN_UP_REQUEST } from './constants';
+import {
+    SIGNUP_REQUEST,
+    SIGNUP_SUCCESS,
+    SIGNUP_FAILURE
+} from './constants';
 
-export const signUpInitialState = {
-    // inProgress tell us there is an undergoing registration process (not api call request)
+export const initialState = {
+    submitting: false,
+    error: null,
     inProgress: false,
-    authData: null,
-    error: null
+    registrationData: null,
+    token: null,
+    mailReSent: null
 };
 
-export default function register(state = signUpInitialState, action) {
+export default function signUp(state = initialState, action) {
     switch (action.type) {
-        case  SIGN_UP_REQUEST:
+        case SIGNUP_REQUEST:
             return Object.assign({}, state, {
+                submitting: true,
+                error: null,
+                inProgress: action.resend || false
+            });
+
+        case SIGNUP_SUCCESS:
+            return Object.assign({}, state, {
+                submitting: false,
                 inProgress: true,
+                mailReSent: action.resend,
+                registrationData: action.registrationData,
+                token: action.data,
                 error: null
             });
-        default: return state;
+
+        case SIGNUP_FAILURE:
+            return Object.assign({}, state, {
+                submitting: false,
+                error: action.error,
+                inProgress: false
+            });
+
+        default:
+            return state;
     }
 }

@@ -21,7 +21,14 @@ export default {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+      // Define environmental variables
+      new webpack.DefinePlugin({
+          'process.env': {
+              API_URL: JSON.stringify(process.env.HIMSS_API_URL) || '"http://localhost"',
+              NODE_ENV: JSON.stringify('development')
+          }
+      })
   ],
   module: {
     loaders: [

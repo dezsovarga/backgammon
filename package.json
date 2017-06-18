@@ -12,6 +12,7 @@
   "author": "Varga Dezso",
   "license": "djyooo",
   "dependencies": {
+    "axios": "^0.15.2",
     "babel-polyfill": "6.8.0",
     "bootstrap": "3.3.6",
     "jquery": "2.2.3",
@@ -29,8 +30,11 @@
   "devDependencies": {
     "babel-cli": "6.8.0",
     "babel-core": "latest",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "6.2.4",
     "babel-plugin-react-display-name": "2.0.0",
+    "babel-plugin-module-resolver": "^2.2.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "6.6.0",
     "babel-preset-react": "6.5.0",
     "babel-preset-react-hmre": "1.1.1",
@@ -42,7 +46,7 @@
     "enzyme": "2.2.0",
     "eslint": "2.9.0",
     "eslint-plugin-import": "1.6.1",
-    "eslint-plugin-react": "5.0.1",
+    "eslint-plugin-react": "^4.3.0",
     "eslint-watch": "2.1.11",
     "eventsource-polyfill": "0.9.6",
     "expect": "1.19.0",

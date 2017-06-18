@@ -8,30 +8,30 @@ const validate = values => {
     if (!values.firstName) {
         errors.firstName = 'Required';
     } else if (values.firstName.length > 15) {
-        errors.firstName = 'Must be 15 characters or less'
+        errors.firstName = 'Must be 15 characters or less';
     }
     if (!values.lastName) {
-        errors.lastName = 'Required'
+        errors.lastName = 'Required';
     } else if (values.lastName.length > 15) {
-        errors.lastName = 'Must be 15 characters or less'
+        errors.lastName = 'Must be 15 characters or less';
     }
     if (!values.email) {
-        errors.email = 'Required'
+        errors.email = 'Required';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
+        errors.email = 'Invalid email address';
     }
     if (!values.password) {
         errors.password = 'Required';
     } else{
         if (values.password.length <6){
-            errors.password = "Must be longer than 6 characters"
+            errors.password = "Must be longer than 6 characters";
         }
     }
     if (values.password !== values.confirmPassword) {
         errors.confirmPassword = "Passwords do not match";
     }
 
-    return errors
+    return errors;
 };
 class SignUpForm extends React.Component {
 
@@ -39,7 +39,7 @@ class SignUpForm extends React.Component {
         const {fields: {firstName, lastName, email, password, confirmPassword}, handleSubmit} = this.props;
         let content = (
             <form className="form-horizontal"
-                  onSubmit={ handleSubmit(this.props.onRegisterSubmit) }>
+                  onSubmit={handleSubmit(this.props.onRegisterSubmit)}>
                 <div className="form-group">
                     <label className="control-label col-xs-3">First Name</label>
                     <div className="col-xs-9">
@@ -107,7 +107,7 @@ class SignUpForm extends React.Component {
             <div className="logo-panel-wrapper">
                 <Panel header="Sign up" className="logo-panel">
                     {content}
-                    {this.props.signUpData}
+
                 </Panel>
             </div>
         );

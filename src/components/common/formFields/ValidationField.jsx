@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import * as CONSTANTS from './constants';
 
-export default class ValidationField extends React.Component {
+class ValidationField extends React.Component {
 
     getFeedback() {
         const { feedback } = this.props;
