@@ -24,12 +24,28 @@ export default class AuthenticationService {
     createAccount(data) {
         const registrationRequest = {
             account: data,
-            verificationLink: `${ApiWrapper.instance.getBaseURL()}himss_ui/#verification`
+            verificationLink: `${ApiWrapper.instance.getBaseURL()}/#verification`
         };
 
         return ApiWrapper.instance.axios.post(
             'account/register',
             JSON.stringify(registrationRequest)
+        );
+    }
+
+    /**
+     * Confirm email
+     * @param {string} confirmToken
+     * @returns {object} The promise object of the api call.
+     */
+    confirmEmail(confirmToken) {
+        return ApiWrapper.instance.axios.get(
+            'account/register/confirm',
+            {
+                headers: {
+                    Authorization: confirmToken
+                }
+            }
         );
     }
 }
