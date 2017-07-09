@@ -2,3 +2,5 @@
 @import "./logo-panel.css";
 @import './generics/generic-entry.scss';
 @import './variables/variables-entry.scss';
+@import './authentication/login.scss';
+@import './authentication/signup.scss';

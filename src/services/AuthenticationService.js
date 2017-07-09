@@ -21,6 +21,27 @@ export default class AuthenticationService {
         return this[singleton];
     }
 
+    /**
+     * Login to app
+     * @param {string} HTTP Basic Authorization header
+     * @returns {string} The bearer token needed for all subsequent operations.
+     */
+    login(loginData) {
+        const tokenEncoded = btoa(unescape(
+            encodeURIComponent(`${loginData.username}:${loginData.password}`)));
+        const config = {
+            headers: {
+                Authorization: `Basic ${tokenEncoded}`
+            },
+            params: {
+                timestamp: Date.now().toString()
+            }
+        };
+        // prevent caching the request using timestamp ( this seems to be relieable on IE too )
+        // Note: setting no-cache header will not be enough for some stupid browsers
+        return ApiWrapper.instance.axios.get('account/login', config);
+    }
+
     createAccount(data) {
         const registrationRequest = {
             account: data,

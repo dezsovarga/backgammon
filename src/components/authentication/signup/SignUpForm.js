@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import {reduxForm} from 'redux-form';
+import { Link } from 'react-router';
 import {Grid, Row, Col, PageHeader, Panel} from 'react-bootstrap';
 import ValidationField from '../../common/formFields/ValidationField.jsx';
 
@@ -34,6 +35,14 @@ const validate = values => {
     return errors;
 };
 class SignUpForm extends React.Component {
+
+    getLoginLink() {
+        return (
+            <Link to="/login">
+                Login Here
+            </Link>
+        );
+    }
 
     render () {
         const {fields: {firstName, lastName, email, password, confirmPassword}, handleSubmit} = this.props;
@@ -96,18 +105,21 @@ class SignUpForm extends React.Component {
                     </div>
                 </div>
                 <div className="form-group">
-                    <div className="col-xs-offset-5 col-xs-7">
+                    <div className="col-xs-12">
                         <button type="submit" className="btn btn-primary">Register</button>
                     </div>
                 </div>
+                OR
+                <span className="login-link">
+                    {this.getLoginLink()}
+                </span>
             </form>
 
         );
         return (
             <div className="logo-panel-wrapper">
-                <Panel header="Sign up" className="logo-panel">
+                <Panel header="Sign up" className="logo-panel text-center">
                     {content}
-
                 </Panel>
             </div>
         );

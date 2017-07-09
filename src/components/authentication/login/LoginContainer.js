@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { authenticate } from './actions';
 import Login from './components/LoginForm';
 
-export default class LoginContainer extends React.Component {
+class LoginContainer extends React.Component {
+
+    handleSubmit(loginData) {
+        const { dispatch } = this.props;
+        return dispatch(
+            authenticate(loginData)
+        );
+    }
+
     render() {
         return (
             <Login
                 {...this.props}
+                onSubmit={this.handleSubmit.bind(this)}
             />
         );
     }
 }
+LoginContainer.propTypes = {
+    dispatch: PropTypes.func.isRequired
+};
+
+function mapStateToProps(state) {
+    return {
+        signUp: state.register
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (LoginContainer);
