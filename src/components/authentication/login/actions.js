@@ -1,5 +1,7 @@
 import AuthenticationService from 'services/AuthenticationService';
 import LocalStorage from 'utils/LocalStorage';
+import ApiWrapper from 'services/ApiWrapper';
+import { LOCALSTORAGE_AUTH_DATA } from 'utils/constants';
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
@@ -17,6 +19,11 @@ export function authenticate(loginData) {
         return AuthenticationService.instance.login(loginData)
             .then((response) => {
                 const authData = response.data;
+                // Set authorization header
+                ApiWrapper.instance.setAuthorizationHeader(authData);
+
+                // Save data in LocalStorage
+                LocalStorage.setEncodedItem(LOCALSTORAGE_AUTH_DATA, authData);
 
                 dispatch({
                     type: LOGIN_SUCCESS

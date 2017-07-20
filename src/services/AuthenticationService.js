@@ -28,7 +28,7 @@ export default class AuthenticationService {
      */
     login(loginData) {
         const tokenEncoded = btoa(unescape(
-            encodeURIComponent(`${loginData.username}:${loginData.password}`)));
+            encodeURIComponent(`${loginData.email}:${loginData.password}`)));
         const config = {
             headers: {
                 Authorization: `Basic ${tokenEncoded}`
@@ -39,7 +39,7 @@ export default class AuthenticationService {
         };
         // prevent caching the request using timestamp ( this seems to be relieable on IE too )
         // Note: setting no-cache header will not be enough for some stupid browsers
-        return ApiWrapper.instance.axios.get('account/login', config);
+        return ApiWrapper.instance.axios.post('account/login', null, config);
     }
 
     createAccount(data) {

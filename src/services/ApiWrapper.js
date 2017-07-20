@@ -30,6 +30,18 @@ export default class ApiWrapper {
         if (enforcer !== singletonEnforcer) throw new Error('Cannot construct singleton');
     }
 
+    setAuthorizationHeader(token) {
+        if (token) {
+            this.axios.defaults.headers.common.Authorization = token;
+        } else {
+            this.removeAuthorizationHeader();
+        }
+    }
+
+    removeAuthorizationHeader() {
+        delete this.axios.defaults.headers.common.Authorization;
+    }
+
     getBaseURL() {
         return this.baseUrl;
     }
