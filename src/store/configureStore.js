@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import rootReducer from '../rootReducer';
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
+import { routerReducer } from 'react-router-redux';
 
 export default function configureStore(initialState) {
 

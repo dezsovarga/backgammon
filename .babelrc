@@ -8,6 +8,7 @@
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
+        "authentication": "components/authentication",
         "services": "services",
         "utils": "utils"
       }
