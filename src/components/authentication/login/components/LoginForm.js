@@ -18,8 +18,21 @@ class LoginForm extends React.Component {
         );
     }
 
+    getError(error) {
+        if (!error) {
+            return null;
+        }
+
+        return (
+            <p className="login-text-content error">
+                {error}
+            </p>
+        );
+    }
+
     render() {
         const {fields: {email, password}, handleSubmit} = this.props;
+        const {login: { error } } = this.props;
         let content = (
             <form className="form-horizontal"
                   onSubmit={handleSubmit}>
@@ -46,12 +59,7 @@ class LoginForm extends React.Component {
                         />
                     </div>
                 </div>
-                {/*<div className="form-group">
-                    <input type="text" className="form-control input-lg" placeholder="Email" />
-                </div>
-                <div className="form-group">
-                    <input type="password" className="form-control input-lg" placeholder="Password" />
-                </div>*/}
+                {this.getError(error)}
                 <div className="form-group">
                     <div className="col-xs-12">
                         <button type="submit" className="btn btn-primary">Login</button>

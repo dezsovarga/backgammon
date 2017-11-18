@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import SignUpForm from './SignUpForm';
+import SignUpForm from './components/SignUpForm';
+// import SignUpInProgress from './components/SignUpInProgress';
 import * as actions from './actions';
 
 // @connect(mapStateToProps, mapDispatchToProps)
@@ -15,11 +16,23 @@ class SignUpContainer extends React.Component {
     }
 
     render () {
-        return (
-            <SignUpForm
-                onRegisterSubmit={this.onRegisterSubmit.bind(this)}
-            />
-        );
+        let content = null;
+
+        if (this.props.signUp.inProgress) {
+            content = (
+                <SignUpInProgress
+                    resendConfirmationEmail={this.resendConfirmationEmail.bind(this)}
+                    {...this.props}
+                />
+            );
+        } else {
+            content = (
+                <SignUpForm
+                    onRegisterSubmit={this.onRegisterSubmit.bind(this)}
+                />
+            );
+        }
+        return content;
     }
 }
 

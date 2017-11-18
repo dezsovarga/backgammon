@@ -51,7 +51,7 @@ export function authenticate(loginData) {
             })
             .catch((error) => {
                 let message;
-                if (error.response) {
+                if (error.response.data.reason) {
                     message = error.response.data.reason;
                 } else {
                     message = error.message;

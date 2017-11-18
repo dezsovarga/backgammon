@@ -1,3 +1,17 @@
 .sign-up-link {
     padding-left: 5px;
 }
+
+.login-text-content {
+    color:red;
+    font-size: 15px;
+    line-height: 1.286;
+    margin: 0;
+    padding: 7px 0 20px;
+    text-align: center;
+
+    &.error {
+        color: $red-2;
+        padding: 10px;
+    }
+}

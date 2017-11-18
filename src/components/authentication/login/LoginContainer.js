@@ -27,7 +27,8 @@ LoginContainer.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        signUp: state.register
+        signUp: state.register,
+        login: state.login
     };
 }
 
