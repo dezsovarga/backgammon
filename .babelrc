@@ -10,7 +10,8 @@
       "alias": {
         "authentication": "components/authentication",
         "services": "services",
-        "utils": "utils"
+        "utils": "utils",
+        "images": "images"
       }
     }]
   ]

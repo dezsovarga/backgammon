@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SignUpForm from './components/SignUpForm';
-// import SignUpInProgress from './components/SignUpInProgress';
+import SignUpInProgress from './components/SignUpInProgress';
 import * as actions from './actions';
 
 // @connect(mapStateToProps, mapDispatchToProps)
@@ -12,6 +12,13 @@ class SignUpContainer extends React.Component {
         const { dispatch } = this.props;
         return dispatch(
             actions.signUp(registrationData)
+        );
+    }
+
+    resendConfirmationEmail() {
+        const { dispatch } = this.props;
+        return dispatch(
+            actions.signUpAndResend(this.props.signUp.registrationData)
         );
     }
 
