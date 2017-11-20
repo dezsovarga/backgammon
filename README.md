@@ -2,4 +2,4 @@
 
 # Issue tracker
 
-https://app.yodiz.com/admin/pages/project-setting.vz?project_id=3&nb=mu&cid=23752
+https://app.yodiz.com/plan/pages/board.vz?cid=23752#/allissues
