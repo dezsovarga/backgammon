@@ -1,16 +1,30 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { connect } from 'react-redux';
+import { logout } from 'authentication/login/actions';
 
 class HomePage extends React.Component {
+
+    onLogout() {
+        const { dispatch } = this.props;
+        dispatch(logout());
+    }
+
 	render () {
 		return (
 			<div className="jumbotron">
-				<h1> Backgammon Administration </h1>
-				<p> React, redux and react router ... </p>
-				<Link to="about" className="btn btn-primary btn-lg"> Learn more </Link>
+				<h1> Backgammon </h1>
+				<p> Welcome  {this.props.authData.username}</p>
+
+				<span onClick={this.onLogout.bind(this)} className="btn btn-primary btn-lg"> Log out </span>
 			</div>
 		);
 	}
 }
 
-export default HomePage;
+function mapStateToProps(state) {
+    return {
+        authData: state.authData
+    };
+}
+
+export default connect(mapStateToProps) (HomePage);

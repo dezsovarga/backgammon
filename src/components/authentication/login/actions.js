@@ -7,7 +7,8 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
-    SET_AUTHDATA
+    SET_AUTHDATA,
+    CLEAR_AUTHDATA
 } from './constants';
 // import { login } from 'authentication/actions';
 // import { addTimestampToAuthData } from 'utils/AuthUtils';
@@ -20,12 +21,42 @@ export function setAuthData(data) {
 
         // Save data in LocalStorage
         LocalStorage.setEncodedItem(LOCALSTORAGE_AUTH_DATA, data);
+        let authData = JSON.parse(atob(data));
+        let token = authData.token;
+        let username = authData.username;
 
         // Update store with AuthData
         dispatch({
             type: SET_AUTHDATA,
-            data
+            token,
+            username
         });
+    };
+}
+
+// clear authentication data
+function clearAuthData() {
+    return (dispatch) => {
+        // Remove authorization header
+        ApiWrapper.instance.removeAuthorizationHeader();
+
+        // Save data in LocalStorage
+        LocalStorage.removeItem(LOCALSTORAGE_AUTH_DATA);
+
+        // Update store with AuthData
+        dispatch({
+            type: CLEAR_AUTHDATA
+        })
+
+        // Mandatory redirect
+        browserHistory.push('/login');
+    };
+}
+
+// logout user with auth data
+export function logout() {
+    return (dispatch) => {
+        dispatch(clearAuthData());
     };
 }
 

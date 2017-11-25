@@ -20,7 +20,8 @@ export function authData(state = authDataInitialState, action) {
     switch (action.type) {
         case SET_AUTHDATA:
             return Object.assign({}, state, {
-                token: action.data
+                token: action.token,
+                username: action.username
         });
 
         case CLEAR_AUTHDATA:
