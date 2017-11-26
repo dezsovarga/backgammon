@@ -4,6 +4,7 @@ import {
     CONFIRMATION_SUCCESS,
     CONFIRMATION_FAILURE
 } from './constants';
+import {setAuthData} from '../actions';
 
 export function confirmEmail(confirmToken) {
     return (dispatch) => {
@@ -29,6 +30,7 @@ export function confirmEmail(confirmToken) {
                     data: response.data,
                     confirmToken
                 });
+                dispatch(setAuthData(confirmToken));
             })
             .catch((error) => {
                 let message;

@@ -1,9 +1,7 @@
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGIN_FAILURE,
-    SET_AUTHDATA,
-    CLEAR_AUTHDATA
+    LOGIN_FAILURE
 } from './constants';
 
 export const initialState = {
@@ -11,26 +9,6 @@ export const initialState = {
     error: null,
     authData: null
 };
-
-export const authDataInitialState = {
-    token: null
-};
-
-export function authData(state = authDataInitialState, action) {
-    switch (action.type) {
-        case SET_AUTHDATA:
-            return Object.assign({}, state, {
-                token: action.token,
-                username: action.username
-        });
-
-        case CLEAR_AUTHDATA:
-            return null;
-
-        default:
-            return state;
-    }
-}
 
 export function login(state = initialState, action) {
     switch (action.type) {

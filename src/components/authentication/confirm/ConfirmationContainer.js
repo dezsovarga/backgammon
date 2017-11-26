@@ -25,7 +25,7 @@ class ConfirmationContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        signUp: state.register
+        confirm: state.confirm
     };
 }
 

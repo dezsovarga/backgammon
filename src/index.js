@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import LocalStorage from 'utils/LocalStorage';
-import { setAuthData } from 'authentication/login/actions';
+import { setAuthData } from 'authentication/actions';
 import routes from './routes';
 import { LOCALSTORAGE_AUTH_DATA } from 'utils/constants';
 import './styles/main.css';
