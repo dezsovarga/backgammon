@@ -34,7 +34,7 @@ export function confirmEmail(confirmToken) {
             })
             .catch((error) => {
                 let message;
-                if (error.response) {
+                if (error.response.data.reason) {
                     message = error.response.data.reason;
                 } else {
                     message = error.message;

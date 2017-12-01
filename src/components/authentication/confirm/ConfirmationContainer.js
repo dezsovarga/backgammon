@@ -12,9 +12,17 @@ class ConfirmationContainer extends React.Component {
         );
     }
 
+    /*onConfirm(){
+        const { dispatch, params } = this.props;
+        dispatch(
+            confirmEmail(params.confirmToken)
+        );
+    }*/
+
     render() {
         return (
             <div className="confirm-container">
+                {/*<span onClick={this.onConfirm.bind(this)} className="btn btn-primary btn-lg"> Confirm </span>*/}
                 <ConfirmationPage
                     {...this.props}
                 />

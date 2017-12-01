@@ -9,4 +9,4 @@ export const CHROME_BROWSER_MESSAGE = 'Click on the LOGIC Discover icon in ' +
 export const CHROME_BROWSER_ERROR_MESSAGE = 'Please open the LOGIC Discover ' +
     'extension to resend the confirmation email.';
 export const ALREADY_VERIFIED = 'You have already verified your email address.';
-export const SUCCESSFULLY_VERIFIED = 'Thank you for verifying your email address.';
+export const SUCCESSFULLY_VERIFIED = 'Successful verification. Thank you for verifying your email address.';
