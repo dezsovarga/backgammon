@@ -44,8 +44,21 @@ class SignUpForm extends React.Component {
         );
     }
 
+    getError(error) {
+        if (!error) {
+            return null;
+        }
+
+        return (
+            <div className="login-text-content error">
+                {error}
+            </div>
+        );
+    }
+
     render () {
         const {fields: {firstName, lastName, email, password, confirmPassword}, handleSubmit} = this.props;
+        const {signUp: { error } } = this.props;
         let content = (
             <form className="form-horizontal"
                   onSubmit={handleSubmit(this.props.onRegisterSubmit)}>
@@ -104,6 +117,7 @@ class SignUpForm extends React.Component {
                         />
                     </div>
                 </div>
+                {this.getError(error)}
                 <div className="form-group">
                     <div className="col-xs-12">
                         <button type="submit" className="btn btn-primary">Register</button>

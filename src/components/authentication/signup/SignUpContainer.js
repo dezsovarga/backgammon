@@ -35,6 +35,7 @@ class SignUpContainer extends React.Component {
         } else {
             content = (
                 <SignUpForm
+                    {...this.props}
                     onRegisterSubmit={this.onRegisterSubmit.bind(this)}
                 />
             );
