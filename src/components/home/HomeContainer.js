@@ -1,8 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { logout } from 'authentication/login/actions';
+import { fetchAccounts } from './actions';
+import AccountsTable from './components/AccountsTable';
 
-class HomePage extends React.Component {
+class HomeContainer extends React.Component {
+
+	componentDidMount() {
+        const { dispatch } = this.props;
+		dispatch(fetchAccounts());
+	}
 
     onLogout() {
         const { dispatch } = this.props;
@@ -16,6 +23,10 @@ class HomePage extends React.Component {
 				<p> Welcome  {this.props.authData.username}</p>
 
 				<span onClick={this.onLogout.bind(this)} className="btn btn-primary btn-lg"> Log out </span>
+
+				<AccountsTable
+                    {...this.props }
+				/>
 			</div>
 		);
 	}
@@ -23,8 +34,13 @@ class HomePage extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        authData: state.authData
+        authData: state.authData,
+		accounts: state.accounts
     };
 }
 
-export default connect(mapStateToProps) (HomePage);
+function mapDispatchToProps(dispatch) {
+    return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (HomeContainer);

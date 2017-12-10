@@ -10,15 +10,14 @@ import { LOCALSTORAGE_AUTH_DATA } from 'utils/constants';
 // set up authentication data
 export function setAuthData(data) {
     return (dispatch) => {
-        // Set authorization header
-        ApiWrapper.instance.setAuthorizationHeader(data);
-
         // Save data in LocalStorage
         LocalStorage.setEncodedItem(LOCALSTORAGE_AUTH_DATA, data);
         let authData = JSON.parse(atob(data));
         let token = authData.token;
         let username = authData.username;
 
+        // Set authorization header
+        ApiWrapper.instance.setAuthorizationHeader(token);
         // Update store with AuthData
         dispatch({
             type: SET_AUTHDATA,
