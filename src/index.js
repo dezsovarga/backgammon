@@ -9,7 +9,7 @@ import LocalStorage from 'utils/LocalStorage';
 import { setAuthData } from 'authentication/actions';
 import routes from './routes';
 import { LOCALSTORAGE_AUTH_DATA } from 'utils/constants';
-import './styles/main.css';
+import './styles/main.scss';
 import  '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const store = configureStore();

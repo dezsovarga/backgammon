@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import {reduxForm} from 'redux-form';
 import { Link } from 'react-router';
 import {Grid, Row, Col, PageHeader, Panel} from 'react-bootstrap';
-import ValidationField from '../../../common/formFields/ValidationField.jsx';
+import ValidationField from 'common/formFields/ValidationField';
 
 const validate = values => {
     const errors = {};

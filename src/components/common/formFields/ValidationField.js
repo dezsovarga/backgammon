@@ -9,18 +9,18 @@ class ValidationField extends React.Component {
         return (
             <label
                 className="feedback clickable-text"
-                onClick={ () => {
+                onClick={() => {
                     return this.props.feedbackHandler ? this.props.feedbackHandler() : null;
-                } }
+                }}
             >
-                { feedback }
+                {feedback}
             </label>
         );
     }
 
     render() {
         let content = null;
-        const { error, touched, feedback } = this.props;
+        const {error, touched, feedback} = this.props;
         const inputClass = classNames(
             this.props.className,
             {
@@ -44,10 +44,10 @@ class ValidationField extends React.Component {
         }
 
         content = (
-            <div className={ inputClass }>
-                { control }
-                { touched && error && <label className="error truncate">{ error }</label> }
-                { feedback && this.getFeedback() }
+            <div className={inputClass}>
+                {control}
+                {touched && error && <label className="error truncate">{error}</label>}
+                {feedback && this.getFeedback()}
             </div>
         );
         return content;

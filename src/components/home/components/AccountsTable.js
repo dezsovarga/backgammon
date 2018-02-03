@@ -12,6 +12,6 @@ export default class AccountsTable extends React.Component {
                 <TableHeaderColumn dataField="firstName">First name</TableHeaderColumn>
                 <TableHeaderColumn dataField="lastName">Last name</TableHeaderColumn>
             </BootstrapTable>
-        )
+        );
     }
 }

@@ -10,6 +10,7 @@ const port = 3000;
 const app = express();
 const compiler = webpack(config);
 
+app.use(express.static(__dirname + '/dist'));
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath

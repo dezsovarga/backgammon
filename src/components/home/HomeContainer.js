@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { logout } from 'authentication/login/actions';
 import { fetchAccounts } from './actions';
 import AccountsTable from './components/AccountsTable';
+import ChatContainer from 'chat/ChatContainer';
+
 
 class HomeContainer extends React.Component {
 
@@ -18,13 +20,15 @@ class HomeContainer extends React.Component {
 
 	render () {
 		return (
-			<div className="jumbotron">
-				<h1> Backgammon </h1>
-				<p> Welcome  {this.props.authData.username}</p>
+			<div className="home-page">
+				<div className="welcome-header">
+					<span onClick={this.onLogout.bind(this)} className="logout-header"> Log out </span>
+					<span className="welcome-username"> Welcome  {this.props.authData.username} </span>
+				</div>
 
-				<span onClick={this.onLogout.bind(this)} className="btn btn-primary btn-lg"> Log out </span>
 
-				<AccountsTable
+
+				<ChatContainer
                     {...this.props }
 				/>
 			</div>
