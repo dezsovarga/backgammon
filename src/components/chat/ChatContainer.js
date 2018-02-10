@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SockJS from 'sockjs-client';
 import MessageList from './components/MessageList';
 import UsersList from './components/UsersList';
 import mockUsers from './data/users.json';
+import {addUser, removeUser, addMessage} from './actions';
 
 class ChatContainer extends React.Component {
 
@@ -14,48 +14,73 @@ class ChatContainer extends React.Component {
             comments: [],
             people: [],
             message: "",
-            users: mockUsers
+            users: []
         };
 
-        let sockjs_url = new SockJS("http://localhost:8081/ws");
-        this.stompClient = Stomp.over(sockjs_url);
-        this.stompClient.connect({}, this.onConnected.bind(this), this.onError);
+        this.props.stompClient.connect({}, this.onConnected.bind(this), this.onError.bind(this));
     }
 
     onConnected() {
 
-        this.stompClient.subscribe("/topic/public", this.onMessageReceived.bind(this));
+        this.props.stompClient.subscribe("/topic/public", this.onMessageReceived.bind(this));
 
         // Tell your username to the server
-        this.stompClient.send("/app/chat.addUser",
+        this.props.stompClient.send("/app/chat.addUser",
             {},
             JSON.stringify({sender: this.props.authData.username, type: 'JOIN'})
         );
     }
 
     onError(error) {
-        console.log("Could not connect to WebSocket server. Please refresh this page to try again!");
-    }
-
-    onMessageReceived(payload) {
-        let message = JSON.parse(payload.body);
+        // console.log("Could not connect to WebSocket server. Please refresh this page to try again!");
+        let message = {
+            "content":"Could not connect to WebSocket server. Please refresh this page to try again!",
+            "type": "ERROR"
+        };
         this.state.comments.push(message);
         this.setState({
             comments: this.state.comments
         });
+    }
+
+    onMessageReceived(payload) {
+        let message = JSON.parse(payload.body);
+        this.props.dispatch(addMessage(message));
+
+        switch (message.type) {
+            case "JOIN": {
+                let joinedUser = {
+                    name: message.sender,
+                    status: "active"
+                };
+                this.props.dispatch(addUser(joinedUser));
+                break;
+            }
+
+            case "LEAVE": {
+                let leftUser = {
+                    name: message.sender,
+                    status: "active"
+                };
+                this.props.dispatch(removeUser(leftUser));
+                break;
+            }
+
+        }
+
         let messageArea = document.getElementById("messageArea");
         messageArea.scrollTop = messageArea.scrollHeight;
     }
 
     sendMessage(event) {
         let messageContent = this.state.message;
-        if(messageContent && this.stompClient) {
+        if(messageContent && this.props.stompClient) {
             let chatMessage = {
                 sender: this.props.authData.username,
                 content: messageContent,
                 type: 'CHAT'
             };
-            this.stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+            this.props.stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         }
     }
 
@@ -72,16 +97,18 @@ class ChatContainer extends React.Component {
     }
 
     render () {
+        const {chat:{users, messages}} = this.props;
+
         return (
             <div className="chat-container">
                 <UsersList
                     {...this.props}
-                    users={this.state.users}
+                    users={this.props.chat.users}
                 />
                 <div className="message-form">
                     <MessageList
                         {...this.props}
-                        comments={this.state.comments}
+                        comments={this.props.chat.messages}
                     />
 
                     <div className="input-form">
@@ -110,7 +137,7 @@ class ChatContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        authData: state.authData
+        chat: state.chat
     };
 }
 

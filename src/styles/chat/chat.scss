@@ -17,7 +17,7 @@
     position: relative;
 
     .users-list {
-        width: 25%;
+        width: 30%;
         float:left;
         border-right: solid 1px grey;
         height: 100%;
@@ -54,7 +54,7 @@
 
     .message-form {
         height: calc(100% - 50px);
-        width: 75%;
+        width: 70%;
         float: left;
     }
 
@@ -92,16 +92,20 @@
                 margin-top: 8px;
                 color: white;
                 display: inline-block;
+
+                &.ERROR {
+                    background-color: #ff93a9;
+                }
+                &.JOIN {
+                    background-color: green;
+
+                }
+                &.LEAVE {
+                    background-color: #ff9908;
+                }
             }
         }
-        .JOIN {
-            text-align: center;
 
-        }
-        .LEAVE {
-            text-align: center;
-
-        }
     }
     .input-form {
         //box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
