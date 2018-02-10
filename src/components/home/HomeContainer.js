@@ -15,7 +15,6 @@ class HomeContainer extends React.Component {
 
         let sockjs_url = new SockJS("http://localhost:8081/ws");
         this.stompClient = Stomp.over(sockjs_url);
-
     }
 
 	componentDidMount() {
@@ -25,11 +24,11 @@ class HomeContainer extends React.Component {
 
 	removeFromUserList() {
         const { dispatch } = this.props;
-    	const userToLeft = {
-    		name: this.props.authData.username
-		}
+        const userToLeft = {
+			name: this.props.authData.username
+        };
 		dispatch(removeUser(userToLeft));
-	}
+    }
 
     onLogout() {
         const { dispatch } = this.props;
