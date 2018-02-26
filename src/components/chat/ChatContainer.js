@@ -44,9 +44,8 @@ class ChatContainer extends React.Component {
     }
 
     onMessageReceived(payload) {
-        let message = JSON.parse(payload.body);
-        this.props.dispatch(addMessage(message));
 
+        let message = JSON.parse(payload.body);
         switch (message.type) {
             case "JOIN": {
                 let joinedUser = {
@@ -67,6 +66,9 @@ class ChatContainer extends React.Component {
             }
 
         }
+
+
+        this.props.dispatch(addMessage(message));
 
         let messageArea = document.getElementById("messageArea");
         messageArea.scrollTop = messageArea.scrollHeight;
@@ -97,8 +99,15 @@ class ChatContainer extends React.Component {
     }
 
     render () {
-        const {chat:{users, messages}} = this.props;
+        const {chat:{users, messages}, params: {username}} = this.props;
 
+        let messagesToDisplayIndex = username ? messages.findIndex(x => x.id === username): 0;
+
+        const messageList = messages.length ?
+            <MessageList
+                {...this.props}
+                comments={messages[messagesToDisplayIndex].messageList}
+            /> : '';
         return (
             <div className="chat-container">
                 <UsersList
@@ -106,10 +115,7 @@ class ChatContainer extends React.Component {
                     users={this.props.chat.users}
                 />
                 <div className="message-form">
-                    <MessageList
-                        {...this.props}
-                        comments={this.props.chat.messages}
-                    />
+                    {messageList}
 
                     <div className="input-form">
                         <input

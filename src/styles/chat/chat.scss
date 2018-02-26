@@ -24,6 +24,10 @@
 
         .chat-user {
             padding: 15px;
+            cursor: pointer;
+            &:hover {
+                background-color: #eeeeee;
+            }
             .avatar {
                 float:left;
                 background-image: url('http://i.stack.imgur.com/Dj7eP.jpg');

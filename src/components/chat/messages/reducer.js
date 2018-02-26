@@ -6,11 +6,9 @@ import {
 export default function messages(state = [], action) {
     switch (action.type) {
         case ADD_CHAT_MESSAGE:
-            return state.concat([
-                {
-                    message: action.message
-                }
-            ]);
+            return Object.assign({}, state, {
+                messages: [...state.messages, action.message]
+            });
 
         default:
             return state;
