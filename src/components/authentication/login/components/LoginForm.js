@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import {reduxForm} from 'redux-form';
 import { Link } from 'react-router';
 import {Panel} from 'react-bootstrap';
-import ValidationField from '../../../common/formFields/ValidationField.jsx';
+import ValidationField from 'common/formFields/ValidationField';
 
 class LoginForm extends React.Component {
 

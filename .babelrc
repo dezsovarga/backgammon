@@ -11,7 +11,9 @@
         "authentication": "components/authentication",
         "services": "services",
         "utils": "utils",
-        "images": "images"
+        "images": "images",
+        "chat": "components/chat",
+        "common": "components/common"
       }
     }]
   ]

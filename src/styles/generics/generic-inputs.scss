@@ -1,5 +1,7 @@
 $margin-size: 8px;
-
+$screen-sm: 544px;
+$light-gray-4: #b4b8cc;
+$dark-gray-1: #3e4152;
 .form-twocolums-wrapper {
     @media screen and (min-width: $screen-sm) {
         margin-right: $margin-size;

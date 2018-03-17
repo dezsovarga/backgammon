@@ -1,0 +1,32 @@
+html,
+body {
+  height: 100%;
+}
+
+.welcome-header {
+  padding: 10px 0 10px 0;
+  .welcome-username {
+    float:right;
+  }
+  .logout-header {
+    float: right;
+    margin: 0 10px 0 10px;
+    color: dodgerblue;
+    cursor: pointer;
+  }
+
+}
+
+.welcome-header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+.home-page {
+  position: relative;
+  height: 100%;
+}

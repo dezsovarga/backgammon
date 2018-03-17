@@ -1,0 +1,138 @@
+.chat-message-list {
+    height: 200px;
+    //width: 50%;
+    background-color: powderblue;
+    margin-bottom: 5px;
+}
+
+.chat-container {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    border-radius: 15px;
+    //margin-top: 30px;
+
+    //max-height: 600px;
+    position: relative;
+
+    .users-list {
+        width: 30%;
+        float:left;
+        border-right: solid 1px grey;
+        height: 100%;
+
+        .chat-user {
+            padding: 15px;
+            cursor: pointer;
+            &:hover {
+                background-color: #eeeeee;
+            }
+            .avatar {
+                float:left;
+                background-image: url('http://i.stack.imgur.com/Dj7eP.jpg');
+                width: 40px;
+                height: 40px;
+
+                /* fill the container, preserving aspect ratio, and cropping to fit */
+                background-size: cover;
+
+                /* center the image vertically and horizontally */
+                background-position: top center;
+
+                /* round the edges to a circle with border radius 1/2 container size */
+                border-radius: 50%;
+            }
+            .chat-username {
+                float:left;
+                margin-left: 10px;
+            }
+        }
+
+        .chat-user:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    }
+
+    .message-form {
+        height: calc(100% - 50px);
+        width: 70%;
+        float: left;
+    }
+
+    .message-area {
+        //min-height:400px;
+        //max-height: 450px;
+        min-width: 300px;
+        overflow: auto;
+        overflow-y: scroll;
+        padding: 0 20px 0px 20px;
+        height: 100%;
+
+        .chat-message {
+            padding: 10px;
+            //border-bottom: lightgrey solid 1px;
+            .author {
+                font-weight: bold;
+                .bullet {
+                    border-radius: 50%;
+                    width: 10px;
+                    height: 10px;
+                    background-color: #35d035;
+                    float: left;
+                    margin: 6px;
+                }
+                .timestamp{
+                    font-weight: normal;
+                    color:lightgrey;
+                }
+            }
+            .message-content {
+                padding: 10px;
+                background: #0ca9ff;
+                border-radius: 10px;
+                margin-top: 8px;
+                color: white;
+                display: inline-block;
+
+                &.ERROR {
+                    background-color: #ff93a9;
+                }
+                &.JOIN {
+                    background-color: green;
+
+                }
+                &.LEAVE {
+                    background-color: #ff9908;
+                }
+            }
+        }
+
+    }
+    .input-form {
+        //box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+        .message-input {
+            width: calc(100% - 85px);
+            min-height: 28px;
+            max-height: 28px;
+            margin: 5px;
+            padding: 15px;
+        }
+
+    }
+    //max-width: 700px;
+
+}
+
+
+
+
+@media only screen and (min-width: 800px) {
+    .chat-container {
+        height:80%;
+        max-width: 800px;
+        margin-top: 80px;
+    }
+}
