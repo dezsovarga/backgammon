@@ -1,4 +1,3 @@
-import { browserHistory } from 'react-router';
 import {
     SET_AUTHDATA,
     CLEAR_AUTHDATA

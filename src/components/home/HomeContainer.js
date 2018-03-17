@@ -10,6 +10,10 @@ import SockJS from 'sockjs-client';
 
 class HomeContainer extends React.Component {
 
+    static contextTypes = {
+        history: React.PropTypes.bool,
+    }
+
     constructor(props, context) {
         super(props, context);
 
@@ -32,7 +36,7 @@ class HomeContainer extends React.Component {
 
     onLogout() {
         const { dispatch } = this.props;
-        dispatch(logout());
+        dispatch(logout(this.context.history.push('/path')));
         this.stompClient.disconnect();
         this.removeFromUserList();
     }

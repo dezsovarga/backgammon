@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import {reduxForm} from 'redux-form';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import {Grid, Row, Col, PageHeader, Panel} from 'react-bootstrap';
 import ValidationField from 'common/formFields/ValidationField';
 

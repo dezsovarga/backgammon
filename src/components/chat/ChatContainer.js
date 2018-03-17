@@ -99,7 +99,7 @@ class ChatContainer extends React.Component {
     }
 
     render () {
-        const {chat:{users, messages}, params: {username}} = this.props;
+        const {chat:{users, messages}, match: {params: {username}}} = this.props;
 
         let messagesToDisplayIndex = username ? messages.findIndex(x => x.id === username): 0;
 

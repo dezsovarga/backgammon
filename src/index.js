@@ -3,17 +3,17 @@ import React from 'react';
 import { render } from 'react-dom';
 import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { createBrowserHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
 import LocalStorage from 'utils/LocalStorage';
 import { setAuthData } from 'authentication/actions';
-import routes from './routes';
 import { LOCALSTORAGE_AUTH_DATA } from 'utils/constants';
 import './styles/main.scss';
 import  '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import AppRoutes from './routes';
 
 const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(createBrowserHistory(), store);
 
 // Update authData from localstorage
 const authData = LocalStorage.getEncodedItem(LOCALSTORAGE_AUTH_DATA);
@@ -23,7 +23,7 @@ if (authData) {
 
 render(
     <Provider store={store}>
-        <Router children={routes(store)} history={history}/>
+        <AppRoutes />
     </Provider>,
     document.getElementById('app')
 );
