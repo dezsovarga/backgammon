@@ -7,7 +7,7 @@ export default class UsersList extends React.Component {
         let userNodes = this.props.users.map(function(user, index) {
             return (
                 <User
-                    name={user.name}
+                    name={user.email}
                     status={user.status}
                     key={index}
                 />
