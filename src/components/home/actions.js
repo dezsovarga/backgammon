@@ -4,6 +4,7 @@ import {
     FETCH_ACCOUNTS_FAILURE} from './constants';
 
 import DataService from '/services/DataService';
+import {loadUserListAndMessages} from "../chat/actions";
 
 export function fetchAccounts() {
     return (dispatch) => {
@@ -17,6 +18,7 @@ export function fetchAccounts() {
                     type: FETCH_ACCOUNTS_SUCCESS,
                     data: response.data
                 });
+                dispatch(loadUserListAndMessages(response.data));
             })
             .catch((error) => {
                 let message;
