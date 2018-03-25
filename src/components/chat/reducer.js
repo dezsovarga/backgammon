@@ -4,17 +4,24 @@ import {
     ADD_CHAT_USER,
     LOAD_USER_LIST_AND_MESSAGES,
     LOAD_USER_LIST_AND_MESSAGES_REQUEST,
-    REMOVE_CHAT_USER
+    REMOVE_CHAT_USER, SET_CURRENT_USER_VIEW
 } from './constants';
 
 const initialState = {
     users:[],
     messages:[],
-    loadingData: true
+    loadingData: true,
+    currentUserView: null
 };
 
 export default function users(state = initialState, action) {
     switch (action.type) {
+        case SET_CURRENT_USER_VIEW: {
+            return Object.assign({}, state, {
+                currentUserView: action.user
+            });
+        }
+
         case LOAD_USER_LIST_AND_MESSAGES_REQUEST: {
             return Object.assign({}, state, {
                 loadingData: true

@@ -1,15 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router';
+import {setCurrentUserView} from '../actions';
+import classNames from 'classnames';
 
 export default class User extends React.Component {
+
+    setCurrentUser() {
+
+        const { dispatch } = this.props;
+        return dispatch(setCurrentUserView(this.props.name));
+    }
+
     render() {
         let username = this.props.name;
         let status = this.props.status;
-        let linkTo = `/chat/${username}`;
+        const isCurrentView = this.props.currentUserView === username;
+        const className = classNames({ 'chat-user': true }, { 'current-view': isCurrentView });
 
         return (
-            <Link to={linkTo}>
-                <div className="chat-user">
+            <div onClick={this.setCurrentUser.bind(this)}>
+                <div className={className}>
                     <div className="avatar">
 
                     </div>
@@ -19,7 +28,7 @@ export default class User extends React.Component {
                     </div>
                     {this.props.children}
                 </div>
-            </Link>
+            </div>
         );
     }
 }
