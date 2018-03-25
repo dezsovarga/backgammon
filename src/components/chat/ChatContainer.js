@@ -133,11 +133,12 @@ class ChatContainer extends React.Component {
     }
 
     render () {
-        const {chat:{users, messages, loading}, params: {username}, accounts: {submitting}} = this.props;
+        const {chat:{users, messages, loading, currentUserView},
+                    params: {username} } = this.props;
 
         let commentsList = [];
         if (!loading) {
-            let messagesToDisplayIndex = username ? messages.findIndex(x => x.id === username): 0;
+            let messagesToDisplayIndex = currentUserView ? messages.findIndex(x => x.id === currentUserView): 0;
             commentsList = messages.length ?
                 messages[messagesToDisplayIndex].messageList : [];
         }
@@ -161,11 +162,11 @@ class ChatContainer extends React.Component {
                             placeholder="Type your message here"
                             aria-describedby="basic-addon1"
                             onChange={this.onMessageChange.bind(this)}
-                            onKeyPress={this.handleKeyPress.bind(this, username)}
+                            onKeyPress={this.handleKeyPress.bind(this, currentUserView)}
                         />
                         <span
                             className="btn btn-primary btn-sm "
-                            onClick={this.sendMessage.bind(this, username)}
+                            onClick={this.sendMessage.bind(this, currentUserView)}
                         >
                         Send
                     </span>

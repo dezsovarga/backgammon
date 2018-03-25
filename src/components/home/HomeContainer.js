@@ -34,7 +34,7 @@ class HomeContainer extends React.Component {
         const { dispatch } = this.props;
         dispatch(logout());
         this.stompClient.disconnect();
-        this.removeFromUserList();
+        // this.removeFromUserList();
     }
 
 	render () {
@@ -57,7 +57,8 @@ class HomeContainer extends React.Component {
 function mapStateToProps(state) {
     return {
         authData: state.authData,
-		accounts: state.accounts
+		accounts: state.accounts,
+        currentUserView: state.chat.currentUserView
     };
 }
 

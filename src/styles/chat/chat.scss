@@ -23,6 +23,10 @@
         height: 100%;
 
         .chat-user {
+
+            &.current-view {
+                background-color: #eeeeee;
+            }
             padding: 15px;
             cursor: pointer;
             &:hover {

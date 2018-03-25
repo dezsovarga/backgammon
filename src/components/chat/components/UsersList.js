@@ -4,9 +4,13 @@ import User from './User';
 export default class UsersList extends React.Component {
 
     render() {
+        let dispatch = this.props.dispatch;
+        let currentUserView = this.props.chat.currentUserView;
         let userNodes = this.props.users.map(function(user, index) {
             return (
                 <User
+                    dispatch={dispatch}
+                    currentUserView = {currentUserView}
                     name={user.email}
                     status={user.status}
                     key={index}
