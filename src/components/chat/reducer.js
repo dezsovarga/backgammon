@@ -3,19 +3,37 @@ import {
     ADD_CHAT_MESSAGE,
     ADD_CHAT_USER,
     LOAD_USER_LIST_AND_MESSAGES,
-    LOAD_USER_LIST_AND_MESSAGES_REQUEST,
-    REMOVE_CHAT_USER, SET_CURRENT_USER_VIEW
+    LOAD_USER_LIST_AND_MESSAGES_REQUEST, NOTIFY_NEW_MESSAGE,
+    REMOVE_CHAT_USER, REMOVE_NOTIFY_NEW_MESSAGE, SET_CURRENT_USER_VIEW
 } from './constants';
 
 const initialState = {
     users:[],
     messages:[],
     loadingData: true,
-    currentUserView: null
+    currentUserView: null,
+    hasNewMessage: []
 };
 
 export default function users(state = initialState, action) {
     switch (action.type) {
+
+        case NOTIFY_NEW_MESSAGE: {
+            return Object.assign({}, state, {
+                hasNewMessage: [...state.hasNewMessage, action.sender]
+            });
+        }
+
+        case REMOVE_NOTIFY_NEW_MESSAGE: {
+            const userIndex = state.hasNewMessage.findIndex(x => x==action.sender);
+            return Object.assign({}, state, {
+                hasNewMessage: [
+                    ...state.hasNewMessage.slice(0, userIndex),
+                    ...state.hasNewMessage.slice(userIndex + 1)
+                ]
+            });
+        }
+
         case SET_CURRENT_USER_VIEW: {
             return Object.assign({}, state, {
                 currentUserView: action.user

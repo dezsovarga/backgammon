@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MessageList from './components/MessageList';
 import UsersList from './components/UsersList';
-import mockUsers from './data/users.json';
-import {addUser, removeUser, addMessage} from './actions';
+import {addMessage, notifyNewMessage} from './actions';
 
 class ChatContainer extends React.Component {
 
@@ -100,6 +99,10 @@ class ChatContainer extends React.Component {
         let message = JSON.parse(payload.body);
         let loggedInUser = this.props.authData.username;
         this.props.dispatch(addMessage(message, loggedInUser));
+        if (!this.props.chat.hasNewMessage.includes(message.sender) &&
+            loggedInUser !== message.sender) {
+            this.props.dispatch(notifyNewMessage(message.sender));
+        }
 
         let messageArea = document.getElementById("messageArea");
         messageArea.scrollTop = messageArea.scrollHeight;
