@@ -4,7 +4,9 @@ import {
     ADD_CHAT_MESSAGE,
     LOAD_USER_LIST_AND_MESSAGES,
     LOAD_USER_LIST_AND_MESSAGES_REQUEST,
-    SET_CURRENT_USER_VIEW
+    SET_CURRENT_USER_VIEW,
+    NOTIFY_NEW_MESSAGE,
+    REMOVE_NOTIFY_NEW_MESSAGE
 } from './constants';
 
 export function setCurrentUserView(user) {
@@ -53,6 +55,24 @@ export function addMessage(message, loggedInUser) {
             type: ADD_CHAT_MESSAGE,
             message,
             loggedInUser
+        });
+    };
+}
+
+export function notifyNewMessage(sender) {
+    return (dispatch) => {
+        dispatch({
+            type: NOTIFY_NEW_MESSAGE,
+            sender
+        });
+    };
+}
+
+export function removeNotifyNewMessage(sender) {
+    return (dispatch) => {
+        dispatch({
+            type: REMOVE_NOTIFY_NEW_MESSAGE,
+            sender
         });
     };
 }

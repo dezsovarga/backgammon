@@ -24,6 +24,9 @@
 
         .chat-user {
 
+            &.has-new-message {
+                font-weight: bold
+            }
             &.current-view {
                 background-color: #eeeeee;
             }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {setCurrentUserView} from '../actions';
+import {setCurrentUserView, removeNotifyNewMessage} from '../actions';
 import classNames from 'classnames';
 
 export default class User extends React.Component {
@@ -7,14 +7,19 @@ export default class User extends React.Component {
     setCurrentUser() {
 
         const { dispatch } = this.props;
-        return dispatch(setCurrentUserView(this.props.name));
+        dispatch(setCurrentUserView(this.props.name));
+        dispatch(removeNotifyNewMessage(this.props.name));
     }
 
     render() {
+
         let username = this.props.name;
         let status = this.props.status;
+        let usersWithNewMessages = this.props.usersWithNewMessages;
         const isCurrentView = this.props.currentUserView === username;
-        const className = classNames({ 'chat-user': true }, { 'current-view': isCurrentView });
+        let hasNewMessage = usersWithNewMessages.includes(username) ? true : false;
+        const className = classNames({ 'chat-user': true }, { 'current-view': isCurrentView },
+            {'has-new-message': hasNewMessage });
 
         return (
             <div onClick={this.setCurrentUser.bind(this)}>
