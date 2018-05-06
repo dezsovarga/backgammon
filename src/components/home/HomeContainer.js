@@ -4,8 +4,15 @@ import { logout } from 'authentication/login/actions';
 import { fetchAccounts } from './actions';
 import { removeUser } from 'chat/actions';
 import AccountsTable from './components/AccountsTable';
+import Header from './components/Header';
+import Navigation from './components/Navigation';
+
 import ChatContainer from 'chat/ChatContainer';
 import SockJS from 'sockjs-client';
+import HomePage from "./components/HomePage";
+import GamePage from "./components/game/GamePage";
+import LeaderBoardPage from "./components/leaderBoard/LeaderBoardPage";
+import AdminPage from "./components/admin/AdminPage";
 
 
 class HomeContainer extends React.Component {
@@ -37,18 +44,48 @@ class HomeContainer extends React.Component {
         // this.removeFromUserList();
     }
 
+    getContent(view) {
+        let content;
+        switch(view) {
+            case "game":
+                content = <GamePage/>;
+                break;
+
+            case "leader-board":
+                content = <LeaderBoardPage/>;
+                break;
+
+            case "chat":
+                content =
+                    (<ChatContainer
+                        stompClient = {this.stompClient}
+                        {...this.props }
+                    />);
+                break;
+
+            case "admin":
+                content = <AdminPage/>;
+                break;
+
+            default:
+                content = <HomePage/>;
+        }
+        return content;
+    }
+
 	render () {
+        const { accounts:{error, submitting}, params: {view}} = this.props;
+        const content = this.getContent(view);
 		return (
 			<div className="home-page">
-				<div className="welcome-header">
-					<span onClick={this.onLogout.bind(this)} className="logout-header"> Log out </span>
-					<span className="welcome-username"> Welcome  {this.props.authData.username} </span>
-				</div>
-
-				<ChatContainer
-					stompClient = {this.stompClient}
-                    {...this.props }
-				/>
+                <Header
+                    {...this.props}
+                />
+                <Navigation
+                    {...this.props}
+                    onLogout={this.onLogout.bind(this)}
+                />
+                {content}
 			</div>
 		);
 	}

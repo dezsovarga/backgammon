@@ -3,9 +3,7 @@ body {
   height: 100%;
 }
 
-.welcome-header {
-  padding: 10px 0 10px 0;
-  .welcome-username {
+.welcome-username {
     float:right;
   }
   .logout-header {
@@ -15,6 +13,9 @@ body {
     cursor: pointer;
   }
 
+.logout-header:hover {
+  background-color: #ddd;
+  color: black;
 }
 
 .welcome-header:after {
@@ -23,7 +24,15 @@ body {
   clear: both;
 }
 
-
+.header {
+  .header_image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  text-align: center;
+  background: white;
+}
 
 
 .home-page {
