@@ -6,6 +6,7 @@ import AboutPage from './components/about/AboutPage';
 import SignUpContainer from './components/authentication/signup/SignUpContainer';
 import LoginContainer from './components/authentication/login/LoginContainer';
 import ConfirmationContainer from './components/authentication/confirm/ConfirmationContainer';
+import EditAccount from "./components/home/components/admin/EditAccountForm";
 
 export default function routes(store) {
 
@@ -30,6 +31,7 @@ export default function routes(store) {
                 <Route path="/verification/:confirmToken" component={ConfirmationContainer}/>
                 <Route path="/chat/:username" component={HomeContainer} />
                 <Route path="/:view" component={HomeContainer} onEnter={requireAuth}/>
+                <Route path="/admin/account/:accountId" component={EditAccount} onEnter={requireAuth}/>
 
             </Route>
         );

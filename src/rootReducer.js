@@ -7,6 +7,7 @@ import accounts from './components/home/reducer';
 import { routerReducer } from 'react-router-redux';
 import {reducer as formReducer} from 'redux-form';
 import chat from './components/chat/reducer';
+import admin from './components/home/components/admin/reducer';
 
 const rootReducer = combineReducers({
     register,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     authData,
     accounts,
     chat,
+    admin,
     routing: routerReducer,
     form: formReducer
 });

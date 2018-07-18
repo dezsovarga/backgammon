@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { logout } from 'authentication/login/actions';
 import { fetchAccounts } from './actions';
 import { removeUser } from 'chat/actions';
-import AccountsTable from './components/AccountsTable';
+import AccountsTable from './components/admin/AccountsTable';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 
@@ -44,7 +44,7 @@ class HomeContainer extends React.Component {
         // this.removeFromUserList();
     }
 
-    getContent(view) {
+    getContent(view, accounts) {
         let content;
         switch(view) {
             case "game":
@@ -64,7 +64,11 @@ class HomeContainer extends React.Component {
                 break;
 
             case "admin":
-                content = <AdminPage/>;
+                content =
+                    (<AdminPage
+                        accounts = {accounts}
+                        {...this.props}
+                    />);
                 break;
 
             default:
@@ -74,8 +78,12 @@ class HomeContainer extends React.Component {
     }
 
 	render () {
-        const { accounts:{error, submitting}, params: {view}} = this.props;
-        const content = this.getContent(view);
+        const { accounts, params: {view}} = this.props;
+        let content = null;
+        if (accounts.data) {
+            content = this.getContent(view, accounts);
+        }
+
 		return (
 			<div className="home-page">
                 <Header
@@ -95,7 +103,8 @@ function mapStateToProps(state) {
     return {
         authData: state.authData,
 		accounts: state.accounts,
-        currentUserView: state.chat.currentUserView
+        currentUserView: state.chat.currentUserView,
+        admin: state.admin
     };
 }
 
